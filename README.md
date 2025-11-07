@@ -1,17 +1,28 @@
-# voyage-tasks
+# **ChinguVerse - Chingu Member Demographics Map**
 
-Your project's `readme` is as important to success as your code. For 
-this reason you should put as much care into its creation and maintenance
-as you would any other component of the application.
+The Chingu Member Demographics Map is a web application that displays demographic information about Chingu members across the world. It helps users explore where Chingus live, their roles, tiers, and other attributes — all shown visually on an interactive world map and in a searchable list view.
 
-If you are unsure of what should go into the `readme` let this article,
-written by an experienced Chingu, be your starting point - 
-[Keys to a well written README](https://tinyurl.com/yk3wubft).
+## **Overview**
 
-And before we go there's "one more thing"! Once you decide what to include
-in your `readme` feel free to replace the text we've provided here.
+This app was built as part of the Chingu Voyage Project(V58-TIER3-TEAM-32). It aims to help the community visualize Chingu demographics in a fun and interactive way.
 
-> Own it & Make it your Own!
+Users can:
+
+View where Chingus are located on a map
+
+Filter results by multiple attributes (like role, tier, country, or gender)
+
+View detailed member data in a list
+
+Optionally chat with an AI assistant to learn how to use the app.
+
+## **Features**
+
+
+
+## **Tech Used / Dependencies**
+
+
 
 ## Team Documents
 
