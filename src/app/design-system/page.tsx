@@ -19,37 +19,35 @@ export default function DesignSystemPage() {
   return (
     <PageWrapper>
       <main className="ds-container">
-      <div className=" bg-gray-50 p-10">
-       
-        <Headline className="mb-6">Design Palette</Headline>
-      <section>
-        <Subheading2 className="mb-3 pb-3 border-b-2 border-neutral-400">
-          These are the core brand colors used in Chinguverse for layout, borders, and text.
-        </Subheading2>
+        <div className=" bg-gray-50 p-10">
+          <Headline className="mb-6">Design Palette</Headline>
+          <section>
+            <Subheading2 className="mb-3 pb-3 border-b-2 border-neutral-400">
+              These are the core brand colors used in Chinguverse for layout,
+              borders, and text.
+            </Subheading2>
 
-        {/* Color Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {colors.map((c) => (
-            <div
-              key={c.name}
-              className="bg-white shadow-md rounded-2xl p-5 flex flex-col items-center text-center hover:shadow-lg transition-all"
-            >
-              <div
-                className="w-16 h-16 rounded-md mb-4 border"
-                style={{ backgroundColor: c.color }}
-              />
-              <Subheading1>{c.name}</Subheading1>
-              <p className="text-sm text-gray-600 mb-2">{c.color}</p>
+            {/* Color Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {colors.map((c) => (
+                <div
+                  key={c.name}
+                  className="bg-white shadow-md rounded-2xl p-5 flex flex-col items-center text-center hover:shadow-lg transition-all"
+                >
+                  <div
+                    className="w-16 h-16 rounded-md mb-4 border"
+                    style={{ backgroundColor: c.color }}
+                  />
+                  <Subheading1>{c.name}</Subheading1>
+                  <p className="text-sm text-gray-600 mb-2">{c.color}</p>
 
-             <ColorSample color={`bg-[${c.color}]`} value={c.color} />
-
-
+                  <ColorSample color={`bg-[${c.color}]`} value={c.color} />
+                </div>
+              ))}
             </div>
-          ))}
+          </section>
         </div>
-         </section>
-      </div>
-       <section>
+        <section>
           <Subheading2 className="mb-3 pb-3 border-b-2 border-neutral-400">
             Typography
           </Subheading2>
@@ -73,37 +71,44 @@ export default function DesignSystemPage() {
             Components
           </Subheading2>
           <Body1 className="mb-3 font-bold">Button Variants</Body1>
-            <div className="flex flex-wrap gap-4 mb-6">
-             <Button variant="default">Default</Button>
+          <div className="flex flex-wrap gap-4 mb-6">
+            <Button variant="default">Default</Button>
             <Button variant="secondary">Secondary</Button>
-            <Button variant="outline">Outline</Button>
-            <Button variant="link">Link</Button> 
-            </div>
+          </div>
+          <Body1 className="mb-3 font-bold">Button Size Variants</Body1>
+          <div className="flex flex-wrap gap-4 mb-6">
+            <Button size="sm">Small</Button>
+            <Button size="default">Default</Button>
+            <Button size="lg">Large</Button>
+          </div>
+          <Body1 className="mb-3 font-bold">Link</Body1>
+          <p>This is a sample of a link: <a href="#" className="link">Example Link</a></p>
 
-         <Body1 className="mb-3 font-bold">Icon Buttons</Body1>
+          {/* <Body1 className="mb-3 font-bold">Icon Buttons</Body1>
           <div className="flex flex-wrap gap-4">
-          <Button size="icon" variant="secondary" title="Map Search">
+            <Button size="icon" variant="secondary" title="Map Search">
               <MapPin />
-          </Button> 
-          
-              <Button size="icon" variant="outline" title="Filter Users">
+            </Button>
+            <Button size="icon" variant="outline" title="Filter Users">
               <Filter />
-          </Button>
-          <Button size="icon" variant="outline" title="c-icon">
+            </Button>
+            <Button size="icon" variant="outline" title="c-icon">
               <Copyright />
-              
-              <Button size="icon" variant="outline" title="github">
-              <Github/>
-          </Button>
-          </Button>
-          <Button size="icon" variant="outline" title="Home">
+            </Button>
+            <Button size="icon" variant="outline" title="github">
+              <Github />
+            </Button>
+            <Button size="icon" variant="outline" title="Home">
               <Home />
-          </Button>
-          <Button className="bg-teal-500 text-black hover:bg-teal-600" title="Community">
+            </Button>
+            <Button
+              className="bg-teal-500 text-black hover:bg-teal-600"
+              title="Community"
+            >
               <Users />
-          </Button> 
-          </div>            
-        </section>     
+            </Button>
+          </div> */}
+        </section>
       </main>
     </PageWrapper>
   );
