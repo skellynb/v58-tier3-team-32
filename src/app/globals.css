@@ -1,26 +1,120 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ============================
+   THEME VARIABLES
+============================ */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Text Colours */
+  --text-primary: var(--text-primary);
+  --text-link: var(--text-secondary);
+  --text-link-hover: var(--text-secondary-hover);
+
+  /* Other Colours */
+  --primary: var(--primary);
+  --primary-hover: var(--primary-hover);
+  --clear: var(--clear);
+  --clear-hover: var(--clear-hover);
+  --border: var(--border);
+  --background: var(--background);
+
+  /* Border radius */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ============================
+   BASE THEME VARIABLES
+============================ */
+:root {
+  /* Text colours */
+  --text-primary: #000000;
+  --text-secondary: #54360F;
+  --text-secondary-hover: #AD8354;
+
+  /* Other colours */
+  --primary: #D5F7BC;
+  --primary-hover: #90C66A;
+  --clear: #FFFFFF;
+  --clear-hover: #DFD8D8;
+  --border: #54360F;
+  --background: #FFFFFF;
+
+  /* Border radius */
+  --radius: 0.625rem;
+}
+
+/* ============================
+   BASE STYLES
+============================ */
+@layer base {
+  body {
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: Arial, Helvetica, sans-serif;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================
+   TYPOGRAPHY
+============================ */
+.headline-xl {
+  @apply text-5xl font-bold;
 }
+
+.headline {
+  @apply text-4xl font-bold;
+}
+
+.subheading1 {
+  @apply text-3xl font-semibold;
+}
+
+.subheading2 {
+  @apply text-2xl font-semibold;
+}
+
+.body1 {
+  @apply text-xl;
+}
+
+.body2 {
+  @apply text-base;
+}
+
+.caption {
+  @apply text-sm;
+}
+
+.label {
+  @apply text-xs font-medium uppercase;
+}
+
+/* ============================
+   LAYOUT UTILITIES
+============================ */
+.ds-container {
+  @apply max-w-7xl mx-auto px-6 sm:px-8 lg:px-10;
+}
+
+.section {
+  @apply mb-20;
+}
+
+/* ============================
+   LINK STYLES
+============================ */
+.link {
+  color: var(--text-link);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: var(--text-link-hover);
+}
+
