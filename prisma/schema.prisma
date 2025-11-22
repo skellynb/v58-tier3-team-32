@@ -13,3 +13,71 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum Gender {
+  MALE
+  FEMALE
+  PREFERNOTTOSAY
+  NONBINARY
+  TRANS
+}
+
+enum MemberGoal {
+  ACCELERATELEARNING
+  GAINEXPERIENCE
+  NETWORKWITHSHAREDGOALS
+  GETOUTOFTUTORIALPURGATORY
+  OTHER
+}
+
+enum MemberSource {
+  PERSONALNETWORK
+  GOOGLESEARCH
+  THEJOBHACKERS
+  FREECODECAMPFORUM
+  MEDIUM
+  DEVTO
+  YOUTUBE
+  LINKEDIN
+  TWITTER
+  SCRIMBA
+  FLUTTEREXPLAINED
+  DEV
+  OTHER
+}
+
+enum MemberRole {
+  DEVELOPER
+  PRODUCTOWNER
+  SCRUMMASTER
+  UIUXDESIGNER
+  DATASCIENTIST
+}
+
+enum MemberRoleType {
+  WEB
+  PYTHON
+}
+
+model Member {
+  id              String          @id @default(cuid())
+  yearJoined      Int
+  gender          Gender
+  timezone        Float
+  countryCode     String
+  goal            MemberGoal?
+  source          MemberSource?
+  soloProjectTier Int?
+  role            MemberRole?
+  roleType        MemberRoleType?
+  voyages         Voyage[]
+}
+
+model Voyage {
+  id      Int      @id @default(autoincrement())
+  members Member[]
+  name    String
+  tier    String
+
+  @@unique([name, tier])
+}
