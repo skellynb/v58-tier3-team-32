@@ -40,10 +40,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-<<<<<<< HEAD
-# docker postgres
-/db-data
-=======
 # prisma generated files
 /src/generated/prisma
->>>>>>> pr34
