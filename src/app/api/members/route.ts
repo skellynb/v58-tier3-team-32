@@ -1,20 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export type MemberModel = {
-  id: number;
-  name: string;
-  country: string;
-  lat: number;
-  lng: number;
-
-  gender?: string;
-  yearJoined?: number;
-  roleType?: string;
-  voyageRole?: string;
-  soloTier?: string;
-  voyageTier?: string;
-  voyage?: string;
-};
+export type MemberModel = unknown;
 
 
 export async function GET(request: NextRequest) {
