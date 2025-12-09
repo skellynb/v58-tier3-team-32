@@ -1,15 +1,12 @@
-"use server";
+"use client";
 
 import Groq from "groq-sdk";
 import { appInfo } from "@/data/appInfo";
 
-// Server-side AI chat function
 export async function aiChat(msg: string) {
   try {
-    // Initialize Groq AI with your server-side API key
-    const groq = new Groq({
-      apiKey: process.env.GROQ_API_KEY, // must be server-side only
-    });
+    const apiKey = process.env.NEXT_PUBLIC_GROQ_API_KEY!;
+    const groq = new Groq({ apiKey });
 
     const systemPrompt = `
       You are a helpful assistant for an application called ChinguVerse.
@@ -22,16 +19,20 @@ export async function aiChat(msg: string) {
       If the question is not related, politely decline.
     `;
 
-    // Send prompt to Groq chat model
+  
+
+    // Groq chat completion
     const completion = await groq.chat.completions.create({
-      model:"llama-3.1-8b-instant", // pick a Groq-supported model
+      model: "llama3-8b-8192",
       messages: [
         { role: "system", content: systemPrompt },
         { role: "user", content: msg },
       ],
+      temperature: 0.7,
     });
 
-    const reply = completion.choices?.[0]?.message?.content || "No response.";
+    const reply =
+      completion.choices?.[0]?.message?.content || "No response.";
 
     return { reply };
   } catch (error) {

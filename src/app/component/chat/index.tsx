@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { aiChat } from "@/app/actions/aichat";
 import { Minus, Send } from "lucide-react";
 import { useClickAway } from "@uidotdev/usehooks";
 import ReactMarkdown from "react-markdown";
@@ -9,7 +8,6 @@ import Image from "next/image";
 import { useAuth } from "@/app/chinguverse/auth/AuthContext";
 
 export default function ChatWindow() {
-  // Chatbot is only available for logged-in users
   const { user } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<{ role: string; text: string }[]>([]);
@@ -19,10 +17,7 @@ export default function ChatWindow() {
   const lastMessageRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  // For closing the modal when clicking outside
-  const ref = useClickAway<HTMLDivElement>(() => {
-    setIsOpen(false);
-  });
+  const ref = useClickAway<HTMLDivElement>(() => setIsOpen(false));
 
   const scrollToLastMessage = () => {
     lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -46,8 +41,14 @@ export default function ChatWindow() {
     setIsLoading(true);
 
     try {
-      // Call the server action directly
-      const data = await aiChat(input);
+      // Call the server-side API route
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: input }),
+      });
+
+      const data = await res.json();
 
       if (data.reply) {
         setMessages((prev) => [...prev, { role: "ai", text: data.reply }]);
@@ -78,7 +79,7 @@ export default function ChatWindow() {
         width={100}
         height={100}
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 right-4 bg-primary p-3 transition-transform  rounded-full hover:scale-110 cursor-pointer"
+        className="fixed bottom-4 right-4 bg-primary p-3 transition-transform rounded-full hover:scale-110 cursor-pointer"
       />
     );
   }
@@ -91,24 +92,19 @@ export default function ChatWindow() {
       {/* Header */}
       <div className="flex justify-between items-center p-3 bg-[#D5F7BC] border-b rounded-t-lg">
         <h3 className="font-bold text-neutral-900">AI Assistant</h3>
-        <button
-          onClick={() => setIsOpen(false)}
-          className="text-gray-500 hover:text-gray-800"
-        >
+        <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-gray-800">
           <Minus size={20} />
         </button>
       </div>
 
-      {/* Chat Messages */}
+      {/* Messages */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {messages.map((m, i) => (
           <div
             key={i}
             ref={i === messages.length - 1 ? lastMessageRef : null}
             className={`p-2 rounded-lg max-w-[85%] prose prose-sm ${
-              m.role === "user"
-                ? "bg-blue-100 ml-auto"
-                : "bg-gray-100 mr-auto"
+              m.role === "user" ? "bg-blue-100 ml-auto" : "bg-gray-100 mr-auto"
             }`}
           >
             <ReactMarkdown>{m.text}</ReactMarkdown>
@@ -126,7 +122,7 @@ export default function ChatWindow() {
         )}
       </div>
 
-      {/* Input Section */}
+      {/* Input */}
       <div className="flex p-3 border-t">
         <input
           ref={inputRef}
@@ -137,12 +133,7 @@ export default function ChatWindow() {
           placeholder="Ask about ChinguVerse..."
           disabled={isLoading}
         />
-
-        <button
-          onClick={sendMessage}
-          className="rounded-l-none h-full px-2 cursor-pointer"
-          disabled={isLoading}
-        >
+        <button onClick={sendMessage} className="rounded-l-none h-full px-2 cursor-pointer" disabled={isLoading}>
           <Send className="rounded w-10 h-10 text-primary bg-[#D5F7BC]" />
         </button>
       </div>
